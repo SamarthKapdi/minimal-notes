@@ -6,11 +6,10 @@ A minimal single-page Notes application built with Node.js, Express, and React (
 
 ## Deliverables & Submission Links
 
-- **Live Application URL (Frontend & API):** `[Insert deployed Vercel URL, e.g., https://minimal-notes-xxxx.vercel.app]`
-- **Live API Endpoint:** `[Insert https://<your-vercel-domain>/notes]`
-- **Website Demo Video (1–2 mins):** `[Insert Loom / YouTube Unlisted link]`
-- **Code Explanation Video (3–5 mins):** `[Insert Loom / YouTube Unlisted link]`
-- **GitHub Repository:** `https://github.com/SamarthKapdi/minimal-notes`
+- **Live Application URL (Frontend & API):** https://minimal-notes-eta.vercel.app/
+- **Live API Endpoint:** https://minimal-notes-eta.vercel.app/notes
+- **Website Demo Video:** https://drive.google.com/file/d/1vjCAYVMuYNzXSgsX5wKBa6-EH2yJ3G8Z/view?usp=sharing
+- **GitHub Repository:** https://github.com/SamarthKapdi/minimal-notes
 
 ---
 
