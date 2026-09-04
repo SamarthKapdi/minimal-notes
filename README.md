@@ -4,6 +4,16 @@ A minimal single-page Notes application built with Node.js, Express, and React (
 
 ---
 
+## Deliverables & Submission Links
+
+- **Live Frontend URL:** `[Insert deployed frontend URL after Vercel deployment]`
+- **Live Backend API URL:** `[Insert deployed backend URL after Render deployment]`
+- **Website Demo Video (1–2 mins):** `[Insert Loom / YouTube Unlisted link]`
+- **Code Explanation Video (3–5 mins):** `[Insert Loom / YouTube Unlisted link]`
+- **GitHub Repository:** `https://github.com/SamarthKapdi/minimal-notes`
+
+---
+
 ## Tech Stack
 
 - **Backend:** Node.js, Express, `cors`
@@ -93,3 +103,21 @@ npm install
 npm run dev
 ```
 The client will start on `http://localhost:5173`.
+
+---
+
+## Production Deployment Guide
+
+### Backend (Render)
+- **Root Directory:** `server`
+- **Build Command:** `npm install`
+- **Start Command:** `node server.js`
+- **Environment Variables:** None required (`PORT` is assigned automatically by Render).
+
+### Frontend (Vercel)
+- **Root Directory:** `client`
+- **Framework Preset:** `Vite`
+- **Build Command:** `npm run build`
+- **Output Directory:** `dist`
+- **Environment Variables:**
+  - `VITE_API_BASE_URL`: `https://<your-deployed-backend-url>.onrender.com`
