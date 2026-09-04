@@ -1,0 +1,13 @@
+{
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    {
+      "source": "/notes/:id*",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/notes",
+      "destination": "/api/index.js"
+    }
+  ]
+}

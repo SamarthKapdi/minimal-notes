@@ -9,12 +9,21 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Normalize incoming URL for Vercel rewrites (supports /notes, /notes/:id, and /api/notes)
+app.use((req, res, next) => {
+  const matchedPath = req.headers['x-matched-path'];
+  if (matchedPath && matchedPath.startsWith('/notes')) {
+    req.url = matchedPath;
+  }
+  next();
+});
+
 // In-memory data store for notes
 // Each note format: { id: string, title: string, content: string, createdAt: string }
 let notes = [];
 
 // Health Check / Root Endpoint
-app.get('/', (req, res) => {
+app.get(['/', '/api'], (req, res) => {
   res.json({
     status: 'online',
     message: 'Notes API is running',
@@ -26,17 +35,15 @@ app.get('/', (req, res) => {
   });
 });
 
-// GET /notes - Retrieve all notes (sorted newest first)
-app.get('/notes', (req, res) => {
-  // Return notes sorted newest first
+// Handlers
+const getNotes = (req, res) => {
   const sortedNotes = [...notes].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
   res.status(200).json(sortedNotes);
-});
+};
 
-// POST /notes - Create a note
-app.post('/notes', (req, res) => {
+const createNote = (req, res) => {
   const { title, content } = req.body;
 
   // Basic validation: title is required and cannot be empty/whitespace only
@@ -54,12 +61,10 @@ app.post('/notes', (req, res) => {
   };
 
   notes.unshift(newNote);
-
   res.status(201).json(newNote);
-});
+};
 
-// DELETE /notes/:id - Delete a note by id
-app.delete('/notes/:id', (req, res) => {
+const deleteNote = (req, res) => {
   const { id } = req.params;
 
   const noteIndex = notes.findIndex((note) => note.id === id);
@@ -76,7 +81,16 @@ app.delete('/notes/:id', (req, res) => {
     message: 'Note deleted successfully.',
     deletedNote,
   });
-});
+};
+
+// GET /notes (and /api/notes) - Retrieve all notes (sorted newest first)
+app.get(['/notes', '/api/notes'], getNotes);
+
+// POST /notes (and /api/notes) - Create a note
+app.post(['/notes', '/api/notes'], createNote);
+
+// DELETE /notes/:id (and /api/notes/:id) - Delete a note by id
+app.delete(['/notes/:id', '/api/notes/:id'], deleteNote);
 
 // 404 Handler for undefined routes
 app.use((req, res) => {
