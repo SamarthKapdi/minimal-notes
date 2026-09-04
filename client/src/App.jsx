@@ -176,10 +176,6 @@ function App() {
           </div>
         </div>
       </main>
-
-      <footer className="app-footer">
-        <p>Built with React & Express &bull; In-Memory Architecture &bull; Clean REST API</p>
-      </footer>
     </div>
   );
 }
